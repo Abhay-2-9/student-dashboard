@@ -3,9 +3,10 @@ interface SkeletonProps {
   height?: string | number;
   className?: string;
   rounded?: boolean;
+  style?: React.CSSProperties;
 }
 
-export function Skeleton({ width, height, className, rounded }: SkeletonProps) {
+export function Skeleton({ width, height, className, rounded, style }: SkeletonProps) {
   return (
     <div
       className={`skeleton${className ? ` ${className}` : ""}`}
@@ -13,6 +14,7 @@ export function Skeleton({ width, height, className, rounded }: SkeletonProps) {
         width: width ?? "100%",
         height: height ?? 16,
         borderRadius: rounded ? "50%" : undefined,
+        ...style,
       }}
     />
   );

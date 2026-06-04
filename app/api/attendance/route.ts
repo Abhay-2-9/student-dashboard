@@ -45,3 +45,25 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Failed to create record" }, { status: 500 });
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const subjectId = searchParams.get("subjectId");
+    const all = searchParams.get("all");
+
+    if (all === "true") {
+      await prisma.attendanceRecord.deleteMany();
+      return NextResponse.json({ success: true });
+    }
+
+    if (subjectId) {
+      await prisma.attendanceRecord.deleteMany({ where: { subjectId } });
+      return NextResponse.json({ success: true });
+    }
+
+    return NextResponse.json({ error: "Missing subjectId or all parameter" }, { status: 400 });
+  } catch {
+    return NextResponse.json({ error: "Failed to delete attendance records" }, { status: 500 });
+  }
+}

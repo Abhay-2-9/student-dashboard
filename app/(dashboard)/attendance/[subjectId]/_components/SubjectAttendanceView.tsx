@@ -2,9 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Card } from "../../../../_components/ui/Card";
-import { AttendanceStatsPanel } from "../_components/AttendanceStats";
-import { ClassLogForm } from "../_components/ClassLogForm";
-import { ClassHistoryTable } from "../_components/ClassHistoryTable";
+import { Button } from "../../../../_components/ui/Button";
+import { Modal } from "../../../../_components/ui/Modal";
+import { useToast } from "../../../../_components/ui/Toast";
+import { AttendanceStatsPanel } from "../../_components/AttendanceStats";
+import { ClassLogForm } from "../../_components/ClassLogForm";
+import { ClassHistoryTable } from "../../_components/ClassHistoryTable";
 import { calculateAttendanceStats } from "../../../../_lib/attendance";
 import type { AttendanceRecord } from "../../../../_types/attendance";
 
@@ -25,7 +28,10 @@ export function SubjectAttendanceView({
   target,
   initialRecords,
 }: SubjectAttendanceViewProps) {
+  const { toast } = useToast();
   const [records, setRecords] = useState<AttendanceRecord[]>(initialRecords);
+  const [resetOpen, setResetOpen] = useState(false);
+  const [resetting, setResetting] = useState(false);
 
   const reload = useCallback(async () => {
     const res = await fetch(`/api/attendance?subjectId=${subjectId}`);
@@ -40,6 +46,21 @@ export function SubjectAttendanceView({
 
   function removeRecord(id: string) {
     setRecords((prev) => prev.filter((r) => r.id !== id));
+  }
+
+  async function handleReset() {
+    setResetting(true);
+    try {
+      const res = await fetch(`/api/attendance?subjectId=${subjectId}`, { method: "DELETE" });
+      if (!res.ok) throw new Error();
+      toast("Attendance history reset", "success");
+      setRecords([]);
+      setResetOpen(false);
+    } catch {
+      toast("Failed to reset history", "error");
+    } finally {
+      setResetting(false);
+    }
   }
 
   return (
@@ -64,14 +85,35 @@ export function SubjectAttendanceView({
 
       {/* History */}
       <Card style={{ padding: 24 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 16 }}>
-          Class History
-          <span style={{ fontSize: 13, color: "var(--text-muted)", fontWeight: 500, marginLeft: 8 }}>
-            ({records.length} class{records.length === 1 ? "" : "es"})
-          </span>
-        </h2>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+          <h2 style={{ fontSize: 16, fontWeight: 700 }}>
+            Class History
+            <span style={{ fontSize: 13, color: "var(--text-muted)", fontWeight: 500, marginLeft: 8 }}>
+              ({records.length} class{records.length === 1 ? "" : "es"})
+            </span>
+          </h2>
+          {records.length > 0 && (
+            <Button variant="ghost" size="sm" style={{ color: "var(--danger)" }} onClick={() => setResetOpen(true)}>
+              Reset History
+            </Button>
+          )}
+        </div>
         <ClassHistoryTable records={records} onDelete={removeRecord} />
       </Card>
+
+      {/* Reset Confirm Modal */}
+      <Modal open={resetOpen} onClose={() => setResetOpen(false)} title="Reset Attendance History">
+        <p style={{ color: "var(--text-secondary)", marginBottom: 8 }}>
+          Are you sure you want to delete all attendance records for <strong style={{ color: "var(--text-primary)" }}>{subjectName}</strong>?
+        </p>
+        <p style={{ color: "var(--danger)", fontSize: 13, marginBottom: 20 }}>
+          ⚠ This action cannot be undone.
+        </p>
+        <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
+          <Button variant="secondary" onClick={() => setResetOpen(false)}>Cancel</Button>
+          <Button variant="danger" loading={resetting} onClick={handleReset}>Reset History</Button>
+        </div>
+      </Modal>
     </div>
   );
 }

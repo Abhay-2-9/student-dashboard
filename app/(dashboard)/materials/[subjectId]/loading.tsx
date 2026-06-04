@@ -1,5 +1,5 @@
-import { Skeleton, SkeletonCard } from "../../../../_components/ui/Skeleton";
-import { Card } from "../../../../_components/ui/Card";
+import { Skeleton, SkeletonCard } from "../../../_components/ui/Skeleton";
+import { Card } from "../../../_components/ui/Card";
 
 export default function SubjectMaterialsLoading() {
   return (

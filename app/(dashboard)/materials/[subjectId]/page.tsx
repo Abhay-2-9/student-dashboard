@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { prisma } from "../../../../_lib/prisma";
-import { Topbar } from "../../../../_components/layout/Topbar";
+import { prisma } from "../../../_lib/prisma";
+import { Topbar } from "../../../_components/layout/Topbar";
 import { SubjectMaterialsView } from "./_components/SubjectMaterialsView";
+import type { MaterialType } from "../../../_types/material";
 
 export async function generateMetadata(props: PageProps<"/materials/[subjectId]">) {
   const { subjectId } = await props.params;
@@ -30,7 +31,7 @@ export default async function SubjectMaterialsPage(props: PageProps<"/materials/
       <Topbar title={subject.name} subtitle={subject.code ?? undefined} />
       <SubjectMaterialsView
         subjectId={subject.id}
-        initialMaterials={materials}
+        initialMaterials={materials.map((m) => ({ ...m, type: m.type as MaterialType }))}
       />
     </div>
   );

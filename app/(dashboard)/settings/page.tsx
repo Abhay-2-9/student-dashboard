@@ -2,6 +2,7 @@ import { prisma } from "../../_lib/prisma";
 import { Topbar } from "../../_components/layout/Topbar";
 import { SubjectManager } from "./_components/SubjectManager";
 import { AttendanceSettings } from "./_components/AttendanceSettings";
+import { GlobalReset } from "./_components/GlobalReset";
 import { Card } from "../../_components/ui/Card";
 
 export const metadata = { title: "Settings — Student Dashboard" };
@@ -31,6 +32,11 @@ export default async function SettingsPage() {
         {/* Subject management */}
         <Card style={{ padding: 24 }}>
           <SubjectManager initialSubjects={subjects} />
+        </Card>
+
+        {/* Danger zone */}
+        <Card style={{ padding: 24, border: "1px solid rgba(239, 68, 68, 0.3)" }}>
+          <GlobalReset />
         </Card>
       </div>
     </div>

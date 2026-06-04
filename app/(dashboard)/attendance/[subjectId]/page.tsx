@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { prisma } from "../../../../_lib/prisma";
-import { Topbar } from "../../../../_components/layout/Topbar";
+import { prisma } from "../../../_lib/prisma";
+import { Topbar } from "../../../_components/layout/Topbar";
 import { SubjectAttendanceView } from "./_components/SubjectAttendanceView";
 
 export async function generateMetadata(props: PageProps<"/attendance/[subjectId]">) {
@@ -48,6 +48,7 @@ export default async function SubjectAttendancePage(props: PageProps<"/attendanc
         target={target}
         initialRecords={records.map((r) => ({
           ...r,
+          status: r.status as "PRESENT" | "ABSENT",
           note: r.note ?? null,
         }))}
       />
