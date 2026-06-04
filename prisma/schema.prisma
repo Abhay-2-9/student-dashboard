@@ -1,0 +1,60 @@
+generator client {
+  // prisma-client is the new Rust-free client (replaces prisma-client-js)
+  // output is required in Prisma 7 — client no longer goes to node_modules
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  // To migrate to PostgreSQL:
+  // 1. Change provider to "postgresql"
+  // 2. Update DATABASE_URL in prisma.config.ts and .env
+  // 3. Swap @prisma/adapter-better-sqlite3 for @prisma/adapter-pg + pg
+  // 4. Update app/_lib/prisma.ts adapter instantiation
+  // No schema or query code changes are required.
+  provider = "sqlite"
+  // url is now configured in prisma.config.ts (Prisma 7 breaking change)
+}
+
+model Subject {
+  id        String   @id @default(cuid())
+  name      String
+  code      String?
+  color     String   @default("#6366f1")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attendance AttendanceRecord[]
+  materials  Material[]
+}
+
+model AttendanceRecord {
+  id        String   @id @default(cuid())
+  date      DateTime
+  status    String   // "PRESENT" | "ABSENT"
+  note      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId String
+}
+
+model Material {
+  id        String   @id @default(cuid())
+  title     String
+  type      String   // "PDF" | "IMAGE" | "NOTE" | "LINK"
+  url       String?  // file path (for PDF/IMAGE) or external URL (for LINK)
+  content   String?  // markdown text (for NOTE)
+  fileSize  Int?     // bytes, for uploaded files
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId String
+}
+
+model Settings {
+  id               String @id @default("singleton")
+  targetAttendance Int    @default(75)
+}
