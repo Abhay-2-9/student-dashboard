@@ -6,17 +6,17 @@ import { Button } from "../../../_components/ui/Button";
 import { Modal } from "../../../_components/ui/Modal";
 import { formatDate, formatFileSize, truncate } from "../../../_lib/utils";
 import { MATERIAL_TYPE_ICONS, MATERIAL_TYPE_LABELS } from "../../../_types/material";
-import type { Material } from "../../../_types/material";
+import type { Material as Document } from "../../../_types/material";
 
-interface MaterialCardProps {
-  material: Material;
+interface DocumentCardProps {
+  document: Document;
   onDelete: (id: string) => void;
 }
 
-export function MaterialCard({ material, onDelete }: MaterialCardProps) {
+export function DocumentCard({ document, onDelete }: DocumentCardProps) {
   const [noteOpen, setNoteOpen] = useState(false);
-  const icon = MATERIAL_TYPE_ICONS[material.type];
-  const label = MATERIAL_TYPE_LABELS[material.type];
+  const icon = MATERIAL_TYPE_ICONS[document.type as keyof typeof MATERIAL_TYPE_ICONS];
+  const label = MATERIAL_TYPE_LABELS[document.type as keyof typeof MATERIAL_TYPE_LABELS];
 
   return (
     <>
@@ -35,20 +35,20 @@ export function MaterialCard({ material, onDelete }: MaterialCardProps) {
                   textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
                 }}
-                title={material.title}
+                title={document.title}
               >
-                {material.title}
+                {document.title}
               </div>
               <div style={{ fontSize: 11, color: "var(--text-muted)", fontWeight: 600, marginTop: 2 }}>
                 {label}
-                {material.fileSize && ` · ${formatFileSize(material.fileSize)}`}
+                {document.fileSize && ` · ${formatFileSize(document.fileSize)}`}
               </div>
             </div>
           </div>
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => onDelete(material.id)}
+            onClick={() => onDelete(document.id)}
             style={{ color: "var(--danger)", padding: "2px 6px", flexShrink: 0, fontSize: 16 }}
           >
             ×
@@ -56,10 +56,10 @@ export function MaterialCard({ material, onDelete }: MaterialCardProps) {
         </div>
 
         {/* Content */}
-        {material.type === "NOTE" && material.content && (
+        {document.type === "NOTE" && document.content && (
           <div style={{ marginBottom: 8 }}>
             <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.5, marginBottom: 8 }}>
-              {truncate(material.content, 120)}
+              {truncate(document.content, 120)}
             </p>
             <button
               onClick={() => setNoteOpen(true)}
@@ -82,9 +82,9 @@ export function MaterialCard({ material, onDelete }: MaterialCardProps) {
         )}
 
         {/* Action */}
-        {material.url && material.type !== "NOTE" && (
+        {document.url && document.type !== "NOTE" && (
           <a
-            href={material.url}
+            href={document.url}
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -96,16 +96,16 @@ export function MaterialCard({ material, onDelete }: MaterialCardProps) {
               fontWeight: 500,
             }}
           >
-            {material.type === "LINK" ? "Open Link ↗" : "View File →"}
+            {document.type === "LINK" ? "Open Link ↗" : "View File →"}
           </a>
         )}
 
         <div style={{ marginTop: 10, fontSize: 11, color: "var(--text-muted)" }}>
-          Added {formatDate(material.createdAt)}
+          Added {formatDate(document.createdAt)}
         </div>
       </Card>
 
-      <Modal open={noteOpen} onClose={() => setNoteOpen(false)} title={material.title}>
+      <Modal open={noteOpen} onClose={() => setNoteOpen(false)} title={document.title}>
         <div 
           style={{ 
             fontSize: 14, 
@@ -118,7 +118,7 @@ export function MaterialCard({ material, onDelete }: MaterialCardProps) {
             wordBreak: "break-word"
           }}
         >
-          {material.content}
+          {document.content}
         </div>
       </Modal>
     </>

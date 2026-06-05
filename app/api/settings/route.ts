@@ -14,11 +14,18 @@ export async function GET() {
 export async function PATCH(req: Request) {
   try {
     const body = await req.json();
-    const { targetAttendance } = updateSettingsSchema.parse(body);
+    const { targetAttendance, academicYear } = updateSettingsSchema.parse(body);
     const settings = await prisma.settings.upsert({
       where: { id: "singleton" },
-      update: { targetAttendance },
-      create: { id: "singleton", targetAttendance },
+      update: { 
+        ...(targetAttendance !== undefined && { targetAttendance }),
+        ...(academicYear !== undefined && { academicYear })
+      },
+      create: { 
+        id: "singleton", 
+        targetAttendance: targetAttendance ?? 75,
+        academicYear: academicYear ?? "2025-26"
+      },
     });
     return NextResponse.json(settings);
   } catch (error: unknown) {

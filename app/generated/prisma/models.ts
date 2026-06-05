@@ -11,5 +11,6 @@
 export type * from './models/Subject'
 export type * from './models/AttendanceRecord'
 export type * from './models/Material'
+export type * from './models/Document'
 export type * from './models/Settings'
 export type * from './commonInputTypes'

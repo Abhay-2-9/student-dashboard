@@ -37,16 +37,19 @@ export type SettingsSumAggregateOutputType = {
 export type SettingsMinAggregateOutputType = {
   id: string | null
   targetAttendance: number | null
+  academicYear: string | null
 }
 
 export type SettingsMaxAggregateOutputType = {
   id: string | null
   targetAttendance: number | null
+  academicYear: string | null
 }
 
 export type SettingsCountAggregateOutputType = {
   id: number
   targetAttendance: number
+  academicYear: number
   _all: number
 }
 
@@ -62,16 +65,19 @@ export type SettingsSumAggregateInputType = {
 export type SettingsMinAggregateInputType = {
   id?: true
   targetAttendance?: true
+  academicYear?: true
 }
 
 export type SettingsMaxAggregateInputType = {
   id?: true
   targetAttendance?: true
+  academicYear?: true
 }
 
 export type SettingsCountAggregateInputType = {
   id?: true
   targetAttendance?: true
+  academicYear?: true
   _all?: true
 }
 
@@ -164,6 +170,7 @@ export type SettingsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type SettingsGroupByOutputType = {
   id: string
   targetAttendance: number
+  academicYear: string
   _count: SettingsCountAggregateOutputType | null
   _avg: SettingsAvgAggregateOutputType | null
   _sum: SettingsSumAggregateOutputType | null
@@ -192,11 +199,13 @@ export type SettingsWhereInput = {
   NOT?: Prisma.SettingsWhereInput | Prisma.SettingsWhereInput[]
   id?: Prisma.StringFilter<"Settings"> | string
   targetAttendance?: Prisma.IntFilter<"Settings"> | number
+  academicYear?: Prisma.StringFilter<"Settings"> | string
 }
 
 export type SettingsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   targetAttendance?: Prisma.SortOrder
+  academicYear?: Prisma.SortOrder
 }
 
 export type SettingsWhereUniqueInput = Prisma.AtLeast<{
@@ -205,11 +214,13 @@ export type SettingsWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.SettingsWhereInput[]
   NOT?: Prisma.SettingsWhereInput | Prisma.SettingsWhereInput[]
   targetAttendance?: Prisma.IntFilter<"Settings"> | number
+  academicYear?: Prisma.StringFilter<"Settings"> | string
 }, "id">
 
 export type SettingsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   targetAttendance?: Prisma.SortOrder
+  academicYear?: Prisma.SortOrder
   _count?: Prisma.SettingsCountOrderByAggregateInput
   _avg?: Prisma.SettingsAvgOrderByAggregateInput
   _max?: Prisma.SettingsMaxOrderByAggregateInput
@@ -223,46 +234,55 @@ export type SettingsScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SettingsScalarWhereWithAggregatesInput | Prisma.SettingsScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Settings"> | string
   targetAttendance?: Prisma.IntWithAggregatesFilter<"Settings"> | number
+  academicYear?: Prisma.StringWithAggregatesFilter<"Settings"> | string
 }
 
 export type SettingsCreateInput = {
   id?: string
   targetAttendance?: number
+  academicYear?: string
 }
 
 export type SettingsUncheckedCreateInput = {
   id?: string
   targetAttendance?: number
+  academicYear?: string
 }
 
 export type SettingsUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   targetAttendance?: Prisma.IntFieldUpdateOperationsInput | number
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SettingsUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   targetAttendance?: Prisma.IntFieldUpdateOperationsInput | number
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SettingsCreateManyInput = {
   id?: string
   targetAttendance?: number
+  academicYear?: string
 }
 
 export type SettingsUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   targetAttendance?: Prisma.IntFieldUpdateOperationsInput | number
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SettingsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   targetAttendance?: Prisma.IntFieldUpdateOperationsInput | number
+  academicYear?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type SettingsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   targetAttendance?: Prisma.SortOrder
+  academicYear?: Prisma.SortOrder
 }
 
 export type SettingsAvgOrderByAggregateInput = {
@@ -272,11 +292,13 @@ export type SettingsAvgOrderByAggregateInput = {
 export type SettingsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   targetAttendance?: Prisma.SortOrder
+  academicYear?: Prisma.SortOrder
 }
 
 export type SettingsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   targetAttendance?: Prisma.SortOrder
+  academicYear?: Prisma.SortOrder
 }
 
 export type SettingsSumOrderByAggregateInput = {
@@ -296,24 +318,28 @@ export type IntFieldUpdateOperationsInput = {
 export type SettingsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   targetAttendance?: boolean
+  academicYear?: boolean
 }, ExtArgs["result"]["settings"]>
 
 export type SettingsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   targetAttendance?: boolean
+  academicYear?: boolean
 }, ExtArgs["result"]["settings"]>
 
 export type SettingsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   targetAttendance?: boolean
+  academicYear?: boolean
 }, ExtArgs["result"]["settings"]>
 
 export type SettingsSelectScalar = {
   id?: boolean
   targetAttendance?: boolean
+  academicYear?: boolean
 }
 
-export type SettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "targetAttendance", ExtArgs["result"]["settings"]>
+export type SettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "targetAttendance" | "academicYear", ExtArgs["result"]["settings"]>
 
 export type $SettingsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Settings"
@@ -321,6 +347,7 @@ export type $SettingsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     targetAttendance: number
+    academicYear: string
   }, ExtArgs["result"]["settings"]>
   composites: {}
 }
@@ -746,6 +773,7 @@ export interface Prisma__SettingsClient<T, Null = never, ExtArgs extends runtime
 export interface SettingsFieldRefs {
   readonly id: Prisma.FieldRef<"Settings", 'String'>
   readonly targetAttendance: Prisma.FieldRef<"Settings", 'Int'>
+  readonly academicYear: Prisma.FieldRef<"Settings", 'String'>
 }
     
 

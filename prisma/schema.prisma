@@ -29,12 +29,13 @@ model Subject {
 }
 
 model AttendanceRecord {
-  id        String   @id @default(cuid())
-  date      DateTime
-  status    String   // "PRESENT" | "ABSENT"
-  note      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(cuid())
+  date        DateTime
+  status      String   // "PRESENT" | "ABSENT"
+  sessionType String   @default("THEORY") // "THEORY" | "LAB"
+  note        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   subjectId String
@@ -54,7 +55,19 @@ model Material {
   subjectId String
 }
 
+model Document {
+  id        String   @id @default(cuid())
+  title     String
+  type      String   // "PDF" | "IMAGE" | "NOTE" | "LINK"
+  url       String?  // file path (for PDF/IMAGE) or external URL (for LINK)
+  content   String?  // markdown text (for NOTE)
+  fileSize  Int?     // bytes, for uploaded files
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Settings {
   id               String @id @default("singleton")
   targetAttendance Int    @default(75)
+  academicYear     String @default("2025-26")
 }

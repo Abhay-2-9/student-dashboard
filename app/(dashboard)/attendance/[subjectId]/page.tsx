@@ -49,6 +49,7 @@ export default async function SubjectAttendancePage(props: PageProps<"/attendanc
         initialRecords={records.map((r) => ({
           ...r,
           status: r.status as "PRESENT" | "ABSENT",
+          sessionType: r.sessionType as "THEORY" | "LAB",
           note: r.note ?? null,
         }))}
       />

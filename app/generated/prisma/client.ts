@@ -57,6 +57,11 @@ export type AttendanceRecord = Prisma.AttendanceRecordModel
  */
 export type Material = Prisma.MaterialModel
 /**
+ * Model Document
+ * 
+ */
+export type Document = Prisma.DocumentModel
+/**
  * Model Settings
  * 
  */

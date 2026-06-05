@@ -44,6 +44,15 @@ export function SubjectAttendanceView({
   const attended = records.filter((r) => r.status === "PRESENT").length;
   const stats = calculateAttendanceStats(attended, records.length, target);
 
+  const theoryRecords = records.filter(r => r.sessionType === "THEORY");
+  const labRecords = records.filter(r => r.sessionType === "LAB");
+
+  const theoryTotal = theoryRecords.length;
+  const theoryAttended = theoryRecords.filter(r => r.status === "PRESENT").length;
+
+  const labTotal = labRecords.length;
+  const labAttended = labRecords.filter(r => r.status === "PRESENT").length;
+
   function removeRecord(id: string) {
     setRecords((prev) => prev.filter((r) => r.id !== id));
   }
@@ -75,6 +84,42 @@ export function SubjectAttendanceView({
           )}
         </h2>
         <AttendanceStatsPanel stats={stats} subjectColor={subjectColor} />
+      </Card>
+
+      {/* Theory & Lab Breakdown */}
+      <Card style={{ padding: 24 }}>
+        <h2 style={{ fontSize: 16, fontWeight: 700, marginBottom: 16 }}>Session Breakdown</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          {/* Theory */}
+          <div style={{ background: "var(--bg-overlay)", padding: 16, borderRadius: "var(--radius)", border: "1px solid var(--border)" }}>
+            <div style={{ fontSize: 13, color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
+              📚 Theory Sessions
+            </div>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+              <span style={{ fontSize: 28, fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}>
+                {theoryAttended}
+              </span>
+              <span style={{ fontSize: 14, color: "var(--text-secondary)", fontWeight: 500 }}>
+                / {theoryTotal} attended
+              </span>
+            </div>
+          </div>
+          
+          {/* Lab */}
+          <div style={{ background: "var(--bg-overlay)", padding: 16, borderRadius: "var(--radius)", border: "1px solid var(--border)" }}>
+            <div style={{ fontSize: 13, color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>
+              🔬 Lab Sessions
+            </div>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+              <span style={{ fontSize: 28, fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}>
+                {labAttended}
+              </span>
+              <span style={{ fontSize: 14, color: "var(--text-secondary)", fontWeight: 500 }}>
+                / {labTotal} attended
+              </span>
+            </div>
+          </div>
+        </div>
       </Card>
 
       {/* Log a class */}

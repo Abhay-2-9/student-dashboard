@@ -62,7 +62,21 @@ export function ClassHistoryTable({ records, onDelete }: ClassHistoryTableProps)
                   {records.length - idx}
                 </td>
                 <td style={{ fontWeight: 500, color: "var(--text-primary)", whiteSpace: "nowrap" }}>
-                  {formatDate(record.date)}
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    {formatDate(record.date)}
+                    <span style={{
+                      fontSize: 10,
+                      fontWeight: 700,
+                      padding: "2px 6px",
+                      borderRadius: 4,
+                      background: record.sessionType === "LAB" ? "var(--accent-light)" : "var(--bg-overlay)",
+                      color: record.sessionType === "LAB" ? "var(--accent)" : "var(--text-muted)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em"
+                    }}>
+                      {record.sessionType}
+                    </span>
+                  </div>
                 </td>
                 <td>
                   <span

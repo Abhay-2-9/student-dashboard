@@ -14,6 +14,7 @@ export function ClassLogForm({ subjectId, onSuccess }: ClassLogFormProps) {
   const { toast } = useToast();
   const [date, setDate] = useState(todayISO());
   const [status, setStatus] = useState<"PRESENT" | "ABSENT">("PRESENT");
+  const [sessionType, setSessionType] = useState<"THEORY" | "LAB">("THEORY");
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -24,7 +25,7 @@ export function ClassLogForm({ subjectId, onSuccess }: ClassLogFormProps) {
       const res = await fetch("/api/attendance", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subjectId, date, status, note: note.trim() || undefined }),
+        body: JSON.stringify({ subjectId, date, status, sessionType, note: note.trim() || undefined }),
       });
       if (!res.ok) throw new Error(await res.text());
       toast("Class recorded successfully", "success");
@@ -87,6 +88,36 @@ export function ClassLogForm({ subjectId, onSuccess }: ClassLogFormProps) {
               </button>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Session Type */}
+      <div>
+        <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-muted)", display: "block", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+          Session Type
+        </label>
+        <div style={{ display: "flex", gap: 8 }}>
+          {(["THEORY", "LAB"] as const).map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => setSessionType(s)}
+              style={{
+                flex: 1,
+                padding: "8px 0",
+                borderRadius: "var(--radius)",
+                border: `1px solid ${sessionType === s ? "var(--accent)" : "var(--border-strong)"}`,
+                background: sessionType === s ? "var(--accent-light)" : "var(--bg-surface)",
+                color: sessionType === s ? "var(--accent)" : "var(--text-secondary)",
+                fontWeight: 600,
+                fontSize: 13,
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+              }}
+            >
+              {s === "THEORY" ? "📚 Theory" : "🔬 Lab"}
+            </button>
+          ))}
         </div>
       </div>
 

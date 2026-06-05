@@ -23,7 +23,7 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { subjectId, date, status, note } = createAttendanceSchema.parse(body);
+    const { subjectId, date, status, sessionType, note } = createAttendanceSchema.parse(body);
 
     // Parse the YYYY-MM-DD date string into a proper Date (midnight UTC)
     const record = await prisma.attendanceRecord.create({
@@ -31,6 +31,7 @@ export async function POST(req: Request) {
         subjectId,
         date: new Date(date + "T00:00:00.000Z"),
         status,
+        sessionType,
         note: note ?? null,
       },
       include: {

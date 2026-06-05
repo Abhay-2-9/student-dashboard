@@ -6,6 +6,7 @@ export type AttendanceRecord = {
   id: string;
   date: Date;
   status: AttendanceStatus;
+  sessionType: "THEORY" | "LAB";
   note: string | null;
   subjectId: string;
   createdAt: Date;

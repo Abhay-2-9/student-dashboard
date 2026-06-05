@@ -54,6 +54,7 @@ export const ModelName = {
   Subject: 'Subject',
   AttendanceRecord: 'AttendanceRecord',
   Material: 'Material',
+  Document: 'Document',
   Settings: 'Settings'
 } as const
 
@@ -86,6 +87,7 @@ export const AttendanceRecordScalarFieldEnum = {
   id: 'id',
   date: 'date',
   status: 'status',
+  sessionType: 'sessionType',
   note: 'note',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -110,9 +112,24 @@ export const MaterialScalarFieldEnum = {
 export type MaterialScalarFieldEnum = (typeof MaterialScalarFieldEnum)[keyof typeof MaterialScalarFieldEnum]
 
 
+export const DocumentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  type: 'type',
+  url: 'url',
+  content: 'content',
+  fileSize: 'fileSize',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
+
+
 export const SettingsScalarFieldEnum = {
   id: 'id',
-  targetAttendance: 'targetAttendance'
+  targetAttendance: 'targetAttendance',
+  academicYear: 'academicYear'
 } as const
 
 export type SettingsScalarFieldEnum = (typeof SettingsScalarFieldEnum)[keyof typeof SettingsScalarFieldEnum]

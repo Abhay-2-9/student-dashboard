@@ -28,6 +28,7 @@ export type AttendanceRecordMinAggregateOutputType = {
   id: string | null
   date: Date | null
   status: string | null
+  sessionType: string | null
   note: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -38,6 +39,7 @@ export type AttendanceRecordMaxAggregateOutputType = {
   id: string | null
   date: Date | null
   status: string | null
+  sessionType: string | null
   note: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -48,6 +50,7 @@ export type AttendanceRecordCountAggregateOutputType = {
   id: number
   date: number
   status: number
+  sessionType: number
   note: number
   createdAt: number
   updatedAt: number
@@ -60,6 +63,7 @@ export type AttendanceRecordMinAggregateInputType = {
   id?: true
   date?: true
   status?: true
+  sessionType?: true
   note?: true
   createdAt?: true
   updatedAt?: true
@@ -70,6 +74,7 @@ export type AttendanceRecordMaxAggregateInputType = {
   id?: true
   date?: true
   status?: true
+  sessionType?: true
   note?: true
   createdAt?: true
   updatedAt?: true
@@ -80,6 +85,7 @@ export type AttendanceRecordCountAggregateInputType = {
   id?: true
   date?: true
   status?: true
+  sessionType?: true
   note?: true
   createdAt?: true
   updatedAt?: true
@@ -163,6 +169,7 @@ export type AttendanceRecordGroupByOutputType = {
   id: string
   date: Date
   status: string
+  sessionType: string
   note: string | null
   createdAt: Date
   updatedAt: Date
@@ -194,6 +201,7 @@ export type AttendanceRecordWhereInput = {
   id?: Prisma.StringFilter<"AttendanceRecord"> | string
   date?: Prisma.DateTimeFilter<"AttendanceRecord"> | Date | string
   status?: Prisma.StringFilter<"AttendanceRecord"> | string
+  sessionType?: Prisma.StringFilter<"AttendanceRecord"> | string
   note?: Prisma.StringNullableFilter<"AttendanceRecord"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AttendanceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AttendanceRecord"> | Date | string
@@ -205,6 +213,7 @@ export type AttendanceRecordOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  sessionType?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -219,6 +228,7 @@ export type AttendanceRecordWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.AttendanceRecordWhereInput | Prisma.AttendanceRecordWhereInput[]
   date?: Prisma.DateTimeFilter<"AttendanceRecord"> | Date | string
   status?: Prisma.StringFilter<"AttendanceRecord"> | string
+  sessionType?: Prisma.StringFilter<"AttendanceRecord"> | string
   note?: Prisma.StringNullableFilter<"AttendanceRecord"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AttendanceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AttendanceRecord"> | Date | string
@@ -230,6 +240,7 @@ export type AttendanceRecordOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  sessionType?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -246,6 +257,7 @@ export type AttendanceRecordScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"AttendanceRecord"> | string
   date?: Prisma.DateTimeWithAggregatesFilter<"AttendanceRecord"> | Date | string
   status?: Prisma.StringWithAggregatesFilter<"AttendanceRecord"> | string
+  sessionType?: Prisma.StringWithAggregatesFilter<"AttendanceRecord"> | string
   note?: Prisma.StringNullableWithAggregatesFilter<"AttendanceRecord"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"AttendanceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"AttendanceRecord"> | Date | string
@@ -256,6 +268,7 @@ export type AttendanceRecordCreateInput = {
   id?: string
   date: Date | string
   status: string
+  sessionType?: string
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -266,6 +279,7 @@ export type AttendanceRecordUncheckedCreateInput = {
   id?: string
   date: Date | string
   status: string
+  sessionType?: string
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -276,6 +290,7 @@ export type AttendanceRecordUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionType?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -286,6 +301,7 @@ export type AttendanceRecordUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionType?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -296,6 +312,7 @@ export type AttendanceRecordCreateManyInput = {
   id?: string
   date: Date | string
   status: string
+  sessionType?: string
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -306,6 +323,7 @@ export type AttendanceRecordUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionType?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -315,6 +333,7 @@ export type AttendanceRecordUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionType?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -335,6 +354,7 @@ export type AttendanceRecordCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  sessionType?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -345,6 +365,7 @@ export type AttendanceRecordMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  sessionType?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -355,6 +376,7 @@ export type AttendanceRecordMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   date?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  sessionType?: Prisma.SortOrder
   note?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -407,6 +429,7 @@ export type AttendanceRecordCreateWithoutSubjectInput = {
   id?: string
   date: Date | string
   status: string
+  sessionType?: string
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -416,6 +439,7 @@ export type AttendanceRecordUncheckedCreateWithoutSubjectInput = {
   id?: string
   date: Date | string
   status: string
+  sessionType?: string
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -453,6 +477,7 @@ export type AttendanceRecordScalarWhereInput = {
   id?: Prisma.StringFilter<"AttendanceRecord"> | string
   date?: Prisma.DateTimeFilter<"AttendanceRecord"> | Date | string
   status?: Prisma.StringFilter<"AttendanceRecord"> | string
+  sessionType?: Prisma.StringFilter<"AttendanceRecord"> | string
   note?: Prisma.StringNullableFilter<"AttendanceRecord"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AttendanceRecord"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AttendanceRecord"> | Date | string
@@ -463,6 +488,7 @@ export type AttendanceRecordCreateManySubjectInput = {
   id?: string
   date: Date | string
   status: string
+  sessionType?: string
   note?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -472,6 +498,7 @@ export type AttendanceRecordUpdateWithoutSubjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionType?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -481,6 +508,7 @@ export type AttendanceRecordUncheckedUpdateWithoutSubjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionType?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -490,6 +518,7 @@ export type AttendanceRecordUncheckedUpdateManyWithoutSubjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionType?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -501,6 +530,7 @@ export type AttendanceRecordSelect<ExtArgs extends runtime.Types.Extensions.Inte
   id?: boolean
   date?: boolean
   status?: boolean
+  sessionType?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -512,6 +542,7 @@ export type AttendanceRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   date?: boolean
   status?: boolean
+  sessionType?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -523,6 +554,7 @@ export type AttendanceRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   date?: boolean
   status?: boolean
+  sessionType?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -534,13 +566,14 @@ export type AttendanceRecordSelectScalar = {
   id?: boolean
   date?: boolean
   status?: boolean
+  sessionType?: boolean
   note?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   subjectId?: boolean
 }
 
-export type AttendanceRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "status" | "note" | "createdAt" | "updatedAt" | "subjectId", ExtArgs["result"]["attendanceRecord"]>
+export type AttendanceRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "status" | "sessionType" | "note" | "createdAt" | "updatedAt" | "subjectId", ExtArgs["result"]["attendanceRecord"]>
 export type AttendanceRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
 }
@@ -560,6 +593,7 @@ export type $AttendanceRecordPayload<ExtArgs extends runtime.Types.Extensions.In
     id: string
     date: Date
     status: string
+    sessionType: string
     note: string | null
     createdAt: Date
     updatedAt: Date
@@ -991,6 +1025,7 @@ export interface AttendanceRecordFieldRefs {
   readonly id: Prisma.FieldRef<"AttendanceRecord", 'String'>
   readonly date: Prisma.FieldRef<"AttendanceRecord", 'DateTime'>
   readonly status: Prisma.FieldRef<"AttendanceRecord", 'String'>
+  readonly sessionType: Prisma.FieldRef<"AttendanceRecord", 'String'>
   readonly note: Prisma.FieldRef<"AttendanceRecord", 'String'>
   readonly createdAt: Prisma.FieldRef<"AttendanceRecord", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"AttendanceRecord", 'DateTime'>

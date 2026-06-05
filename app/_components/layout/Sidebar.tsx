@@ -7,10 +7,11 @@ const NAV_ITEMS = [
   { href: "/",           label: "Overview",       icon: "◈" },
   { href: "/attendance", label: "Attendance",      icon: "✓" },
   { href: "/materials",  label: "Study Materials", icon: "📂" },
+  { href: "/documents",  label: "Documents",       icon: "📄" },
   { href: "/settings",   label: "Settings",        icon: "⚙" },
 ];
 
-export function Sidebar() {
+export function Sidebar({ academicYear }: { academicYear: string }) {
   const pathname = usePathname();
 
   function isActive(href: string) {
@@ -73,7 +74,7 @@ export function Sidebar() {
       {/* Footer */}
       <div style={{ padding: "16px 20px", borderTop: "1px solid var(--border)" }}>
         <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
-          Academic Year 2025–26
+          Academic Year {academicYear}
         </div>
       </div>
     </aside>

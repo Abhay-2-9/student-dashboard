@@ -1,3 +1,5 @@
+import { ThemeToggle } from "../ui/ThemeToggle";
+
 interface TopbarProps {
   title: string;
   subtitle?: string;
@@ -11,7 +13,10 @@ export function Topbar({ title, subtitle, actions }: TopbarProps) {
         <h1 className="page-title">{title}</h1>
         {subtitle && <p className="page-subtitle">{subtitle}</p>}
       </div>
-      {actions && <div style={{ display: "flex", gap: 10, alignItems: "center" }}>{actions}</div>}
+      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        {actions}
+        <ThemeToggle />
+      </div>
     </div>
   );
 }
