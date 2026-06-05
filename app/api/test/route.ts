@@ -7,7 +7,7 @@ export async function GET() {
   try {
     const buffer = readFileSync(join(process.cwd(), "dummy.pdf"));
     // Test PDF upload
-    const publicUrl = await uploadToCloudinary(buffer, "student-dashboard/test", "test-pdf-raw", true);
+    const publicUrl = await uploadToCloudinary(buffer, "student-dashboard/test", "test-pdf-raw");
     
     return NextResponse.json({ url: publicUrl });
   } catch (error) {

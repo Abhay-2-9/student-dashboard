@@ -25,7 +25,7 @@ startxref
 
 writeFileSync('dummy.pdf', pdf);
 
-async function testUpload(resourceType) {
+async function testUpload(resourceType: "raw" | "image" | "auto"): Promise<any> {
   const buffer = readFileSync("dummy.pdf");
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
@@ -35,7 +35,7 @@ async function testUpload(resourceType) {
         resource_type: resourceType,
         use_filename: true,
       },
-      (error, result) => {
+      (error: any, result: any) => {
         if (error) reject(error);
         else resolve(result);
       }
