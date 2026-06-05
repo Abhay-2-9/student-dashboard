@@ -2,6 +2,8 @@
 
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 /* ── Design Tokens ───────────────────────────────────────────────────────────── */
 :root {
   /* Background layers - Premium Linear/Notion Light Theme */
@@ -47,7 +49,7 @@
   --radius-xl:  24px;
 }
 
-[data-theme="dark"] {
+.dark {
   /* Dark theme variables */
   --bg-base:     #0F172A; /* Slate 900 */
   --bg-surface:  #1E293B; /* Slate 800 */
@@ -165,7 +167,7 @@ a:hover { opacity: 0.85; text-decoration: underline; }
 }
 
 .btn-secondary {
-  background: #FFFFFF;
+  background: var(--bg-surface);
   color: var(--text-primary);
   border-color: var(--border-strong);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -216,7 +218,7 @@ a:hover { opacity: 0.85; text-decoration: underline; }
   font-family: inherit;
   font-size: 14px;
   color: var(--text-primary);
-  background: #FFFFFF;
+  background: var(--bg-surface);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius);
   outline: none;

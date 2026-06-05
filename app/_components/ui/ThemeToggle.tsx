@@ -1,11 +1,15 @@
 "use client";
 
-import { useTheme } from "../providers/ThemeProvider";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
-  const { theme, toggleTheme, mounted } = useTheme();
-  
-  const isDark = theme === "dark";
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
     return (
@@ -20,6 +24,14 @@ export function ThemeToggle() {
         }}
       />
     );
+  }
+
+  const isDark = theme === "dark";
+
+  function toggleTheme() {
+    console.log("Current theme:", theme);
+    console.log("Setting theme:", isDark ? "light" : "dark");
+    setTheme(isDark ? "light" : "dark");
   }
 
   return (
