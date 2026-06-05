@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "../../../_components/ui/Button";
 import { Modal } from "../../../_components/ui/Modal";
 import { useToast } from "../../../_components/ui/Toast";
@@ -17,6 +18,7 @@ const PRESET_COLORS = [
 
 export function SubjectManager({ initialSubjects }: SubjectManagerProps) {
   const { toast } = useToast();
+  const router = useRouter();
   const [subjects, setSubjects] = useState<Subject[]>(initialSubjects);
   const [addOpen, setAddOpen] = useState(false);
   const [editTarget, setEditTarget] = useState<Subject | null>(null);
@@ -53,6 +55,7 @@ export function SubjectManager({ initialSubjects }: SubjectManagerProps) {
       setSubjects((prev) => [...prev, created]);
       toast("Subject added", "success");
       setAddOpen(false);
+      router.refresh();
     } catch {
       toast("Failed to add subject", "error");
     } finally {
@@ -75,6 +78,7 @@ export function SubjectManager({ initialSubjects }: SubjectManagerProps) {
       setSubjects((prev) => prev.map((s) => s.id === updated.id ? updated : s));
       toast("Subject updated", "success");
       setEditTarget(null);
+      router.refresh();
     } catch {
       toast("Failed to update subject", "error");
     } finally {
@@ -91,6 +95,7 @@ export function SubjectManager({ initialSubjects }: SubjectManagerProps) {
       setSubjects((prev) => prev.filter((s) => s.id !== deleteTarget.id));
       toast("Subject deleted", "success");
       setDeleteTarget(null);
+      router.refresh();
     } catch {
       toast("Failed to delete subject", "error");
     } finally {

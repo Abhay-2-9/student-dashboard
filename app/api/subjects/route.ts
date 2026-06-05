@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "../../_lib/prisma";
 import { createSubjectSchema } from "../../_lib/validations";
 
@@ -21,6 +22,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const data = createSubjectSchema.parse(body);
     const subject = await prisma.subject.create({ data });
+    revalidatePath("/", "layout");
     return NextResponse.json(subject, { status: 201 });
   } catch (error: unknown) {
     if (error instanceof Error && error.name === "ZodError") {

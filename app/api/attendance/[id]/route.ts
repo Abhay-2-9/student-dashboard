@@ -20,7 +20,7 @@ export async function PATCH(
         ...(note !== undefined && { note }),
       },
     });
-    revalidatePath("/attendance", "layout");
+    revalidatePath("/", "layout");
     return NextResponse.json(record);
   } catch (error: unknown) {
     if (error instanceof Error && error.name === "ZodError") {
@@ -37,7 +37,7 @@ export async function DELETE(
   try {
     const { id } = await ctx.params;
     await prisma.attendanceRecord.delete({ where: { id } });
-    revalidatePath("/attendance", "layout");
+    revalidatePath("/", "layout");
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to delete record" }, { status: 500 });

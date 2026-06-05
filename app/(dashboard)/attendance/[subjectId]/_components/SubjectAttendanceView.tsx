@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Card } from "../../../../_components/ui/Card";
 import { Button } from "../../../../_components/ui/Button";
 import { Modal } from "../../../../_components/ui/Modal";
@@ -29,6 +30,7 @@ export function SubjectAttendanceView({
   initialRecords,
 }: SubjectAttendanceViewProps) {
   const { toast } = useToast();
+  const router = useRouter();
   const [records, setRecords] = useState<AttendanceRecord[]>(initialRecords);
   const [resetOpen, setResetOpen] = useState(false);
   const [resetting, setResetting] = useState(false);
@@ -65,6 +67,7 @@ export function SubjectAttendanceView({
       toast("Attendance history reset", "success");
       setRecords([]);
       setResetOpen(false);
+      router.refresh();
     } catch {
       toast("Failed to reset history", "error");
     } finally {

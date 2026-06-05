@@ -9,7 +9,14 @@ import { formatDate } from "../_lib/utils";
 
 export const metadata = { title: "Overview — Student Dashboard" };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+import { unstable_noStore as noStore } from "next/cache";
+
 export default async function OverviewPage() {
+  noStore();
+  
   const [subjects, settings, recentRecords, totalMaterials] = await Promise.all([
     prisma.subject.findMany({
       orderBy: { createdAt: "asc" },

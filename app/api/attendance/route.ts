@@ -39,7 +39,7 @@ export async function POST(req: Request) {
         subject: { select: { id: true, name: true, color: true } },
       },
     });
-    revalidatePath("/attendance", "layout");
+    revalidatePath("/", "layout");
     return NextResponse.json(record, { status: 201 });
   } catch (error: unknown) {
     if (error instanceof Error && error.name === "ZodError") {
@@ -57,13 +57,13 @@ export async function DELETE(req: Request) {
 
     if (all === "true") {
       await prisma.attendanceRecord.deleteMany();
-      revalidatePath("/attendance", "layout");
+      revalidatePath("/", "layout");
       return NextResponse.json({ success: true });
     }
 
     if (subjectId) {
       await prisma.attendanceRecord.deleteMany({ where: { subjectId } });
-      revalidatePath("/attendance", "layout");
+      revalidatePath("/", "layout");
       return NextResponse.json({ success: true });
     }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "../../../_components/ui/Button";
 import { Modal } from "../../../_components/ui/Modal";
 import { useToast } from "../../../_components/ui/Toast";
@@ -14,6 +15,7 @@ interface ClassHistoryTableProps {
 
 export function ClassHistoryTable({ records, onDelete }: ClassHistoryTableProps) {
   const { toast } = useToast();
+  const router = useRouter();
   const [deleting, setDeleting] = useState<string | null>(null);
   const [confirmId, setConfirmId] = useState<string | null>(null);
 
@@ -24,6 +26,7 @@ export function ClassHistoryTable({ records, onDelete }: ClassHistoryTableProps)
       if (!res.ok) throw new Error();
       toast("Record deleted", "success");
       onDelete(id);
+      router.refresh();
     } catch {
       toast("Failed to delete record", "error");
     } finally {
