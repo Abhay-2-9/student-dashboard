@@ -452,6 +452,7 @@ export type AttendanceRecordCreateOrConnectWithoutSubjectInput = {
 
 export type AttendanceRecordCreateManySubjectInputEnvelope = {
   data: Prisma.AttendanceRecordCreateManySubjectInput | Prisma.AttendanceRecordCreateManySubjectInput[]
+  skipDuplicates?: boolean
 }
 
 export type AttendanceRecordUpsertWithWhereUniqueWithoutSubjectInput = {
@@ -1264,6 +1265,7 @@ export type AttendanceRecordCreateManyArgs<ExtArgs extends runtime.Types.Extensi
    * The data used to create many AttendanceRecords.
    */
   data: Prisma.AttendanceRecordCreateManyInput | Prisma.AttendanceRecordCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1282,6 +1284,7 @@ export type AttendanceRecordCreateManyAndReturnArgs<ExtArgs extends runtime.Type
    * The data used to create many AttendanceRecords.
    */
   data: Prisma.AttendanceRecordCreateManyInput | Prisma.AttendanceRecordCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

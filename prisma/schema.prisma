@@ -6,13 +6,7 @@ generator client {
 }
 
 datasource db {
-  // To migrate to PostgreSQL:
-  // 1. Change provider to "postgresql"
-  // 2. Update DATABASE_URL in prisma.config.ts and .env
-  // 3. Swap @prisma/adapter-better-sqlite3 for @prisma/adapter-pg + pg
-  // 4. Update app/_lib/prisma.ts adapter instantiation
-  // No schema or query code changes are required.
-  provider = "sqlite"
+  provider = "postgresql"
   // url is now configured in prisma.config.ts (Prisma 7 breaking change)
 }
 
