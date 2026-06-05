@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "../../_lib/prisma";
 import { createAttendanceSchema } from "../../_lib/validations";
 
@@ -38,6 +39,7 @@ export async function POST(req: Request) {
         subject: { select: { id: true, name: true, color: true } },
       },
     });
+    revalidatePath("/attendance", "layout");
     return NextResponse.json(record, { status: 201 });
   } catch (error: unknown) {
     if (error instanceof Error && error.name === "ZodError") {
@@ -55,11 +57,13 @@ export async function DELETE(req: Request) {
 
     if (all === "true") {
       await prisma.attendanceRecord.deleteMany();
+      revalidatePath("/attendance", "layout");
       return NextResponse.json({ success: true });
     }
 
     if (subjectId) {
       await prisma.attendanceRecord.deleteMany({ where: { subjectId } });
+      revalidatePath("/attendance", "layout");
       return NextResponse.json({ success: true });
     }
 

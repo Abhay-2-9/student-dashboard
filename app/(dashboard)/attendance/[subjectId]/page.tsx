@@ -10,6 +10,8 @@ export async function generateMetadata(props: PageProps<"/attendance/[subjectId]
   return { title: subject ? `${subject.name} Attendance — Student Dashboard` : "Attendance" };
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function SubjectAttendancePage(props: PageProps<"/attendance/[subjectId]">) {
   const { subjectId } = await props.params;
 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "../../../_components/ui/Button";
 import { useToast } from "../../../_components/ui/Toast";
+import { useRouter } from "next/navigation";
 import { todayISO } from "../../../_lib/utils";
 
 interface ClassLogFormProps {
@@ -12,6 +13,7 @@ interface ClassLogFormProps {
 
 export function ClassLogForm({ subjectId, onSuccess }: ClassLogFormProps) {
   const { toast } = useToast();
+  const router = useRouter();
   const [date, setDate] = useState(todayISO());
   const [status, setStatus] = useState<"PRESENT" | "ABSENT">("PRESENT");
   const [sessionType, setSessionType] = useState<"THEORY" | "LAB">("THEORY");
@@ -31,6 +33,7 @@ export function ClassLogForm({ subjectId, onSuccess }: ClassLogFormProps) {
       toast("Class recorded successfully", "success");
       setNote("");
       onSuccess();
+      router.refresh();
     } catch {
       toast("Failed to record class", "error");
     } finally {

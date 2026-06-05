@@ -6,14 +6,13 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function uploadToCloudinary(buffer: Buffer, folder: string, filename: string, isPdf: boolean = false): Promise<string> {
+export async function uploadToCloudinary(buffer: Buffer, folder: string, filename: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       {
         folder,
         public_id: filename,
-        resource_type: isPdf ? "raw" : "auto",
-        use_filename: true,
+        resource_type: "auto",
       },
       (error, result) => {
         if (error) reject(error);

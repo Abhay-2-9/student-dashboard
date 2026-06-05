@@ -8,6 +8,8 @@ export const metadata = {
   title: "Attendance — Student Dashboard",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function AttendancePage() {
   const [subjects, settings] = await Promise.all([
     prisma.subject.findMany({

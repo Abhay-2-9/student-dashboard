@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { writeFile, mkdir } from "fs/promises";
-import { join, extname } from "path";
+import { join, parse, extname } from "path";
 import { prisma } from "../../../_lib/prisma";
 import { uploadToCloudinary } from "../../../_lib/cloudinary";
 
@@ -35,11 +35,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "File too large. Maximum 50 MB." }, { status: 413 });
     }
 
-    const isPdf = materialType === "PDF";
-    const safeName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, "_")}${extname(file.name)}`;
+    const baseName = parse(file.name).name.replace(/[^a-zA-Z0-9._-]/g, "_");
+    const safeName = `${Date.now()}-${baseName}`;
     const buffer   = Buffer.from(await file.arrayBuffer());
     
-    const publicUrl = await uploadToCloudinary(buffer, `student-dashboard/materials/${subjectId}`, safeName, isPdf);
+    const publicUrl = await uploadToCloudinary(buffer, `student-dashboard/materials/${subjectId}`, safeName);
 
     const material = await prisma.material.create({
       data: {

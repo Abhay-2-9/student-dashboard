@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "../../../_lib/prisma";
 import { updateAttendanceSchema } from "../../../_lib/validations";
 
@@ -19,6 +20,7 @@ export async function PATCH(
         ...(note !== undefined && { note }),
       },
     });
+    revalidatePath("/attendance", "layout");
     return NextResponse.json(record);
   } catch (error: unknown) {
     if (error instanceof Error && error.name === "ZodError") {
@@ -35,6 +37,7 @@ export async function DELETE(
   try {
     const { id } = await ctx.params;
     await prisma.attendanceRecord.delete({ where: { id } });
+    revalidatePath("/attendance", "layout");
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to delete record" }, { status: 500 });
